@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glass {
+    @apply bg-white bg-opacity-70 backdrop-blur-lg border border-white border-opacity-40 shadow-lg relative overflow-hidden;
+  }
+}
+
+body {
+  background-color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+}
+
+
+/* Global Text Selection & Cursor Override */
+* {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  cursor: default;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
+  cursor: text !important;
+}
+
+button,
+a,
+[role="button"],
+select,
+.cursor-pointer {
+  cursor: pointer !important;
+}
