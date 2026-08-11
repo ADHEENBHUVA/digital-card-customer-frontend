@@ -4,7 +4,7 @@ const BusinessHero = ({ hero = {} }) => {
     // Helper to prefix local uploads with backend host
     const getMediaUrl = (url) => {
         if (!url) return '';
-        if (url.startsWith('/uploads')) return `http://localhost:5000${url}`;
+        if (url.startsWith('/uploads')) return `${import.meta.env.VITE_API_URL}${url}`;
         return url;
     };
 

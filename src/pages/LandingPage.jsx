@@ -15,7 +15,7 @@ const LandingPage = () => {
     const [inquiryData, setInquiryData] = useState({ name: '', mobile: '', email: '', subject: '', message: '' });
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/public/profile/${slug}?_t=${Date.now()}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}?_t=${Date.now()}`, {
             cache: 'no-store',
             headers: {
                 'Cache-Control': 'no-cache',
@@ -47,7 +47,7 @@ const LandingPage = () => {
 
     const getMediaUrl = (url) => {
         if (!url) return '';
-        if (url.startsWith('/uploads')) return `http://localhost:5000${url}`;
+        if (url.startsWith('/uploads')) return `${import.meta.env.VITE_API_URL}${url}`;
         return url;
     };
 
@@ -254,7 +254,7 @@ const LandingPage = () => {
                             <p className="text-sm text-slate-500 mb-6 text-center">Share this card instantly by scanning the code below</p>
 
                             <div className="p-3 bg-white border-2 border-slate-100 rounded-2xl shadow-sm mb-6">
-                                {data.qrCodeUrl && <img src={`http://localhost:5000${data.qrCodeUrl}`} alt="QR Code" className="w-[200px] h-[200px] object-contain" />}
+                                {data.qrCodeUrl && <img src={`${import.meta.env.VITE_API_URL}${data.qrCodeUrl}`} alt="QR Code" className="w-[200px] h-[200px] object-contain" />}
                             </div>
 
                             <button onClick={() => setShowQR(false)} className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors">
