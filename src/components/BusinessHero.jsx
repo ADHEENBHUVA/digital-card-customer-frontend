@@ -51,8 +51,9 @@ const BusinessHero = ({ hero = {} }) => {
                     )}
                 </div>
 
-                <h1 className="text-[26px] sm:text-[28px] font-bold text-white tracking-wide leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+                <h1 className="text-[26px] sm:text-[28px] font-bold text-white tracking-wide leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] flex items-center justify-center gap-1.5">
                     {hero.name}
+                    <img src="https://img.icons8.com/color/48/verified-badge.png" alt="Verified" className="w-[26px] h-[26px] drop-shadow-md" />
                 </h1>
 
                 {hero.company && (

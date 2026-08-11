@@ -29,9 +29,9 @@ const DynamicGrid = ({ buttons }) => {
                     {rowItems.map((btn, index) => {
                         const content = (
                             <div className="flex flex-col items-center cursor-pointer group w-full">
-                                <div className={`relative w-[56px] h-[56px] rounded-full flex items-center justify-center text-white shadow-[0_8px_20px_rgba(0,0,0,0.1)] ${btn.bgClass || 'bg-[#3b82f6]'} transform transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-110 group-hover:shadow-[0_12px_25px_rgba(0,0,0,0.15)] active:scale-95 overflow-hidden`}>
+                                <div className={`relative w-[60px] h-[60px] rounded-[18px] flex items-center justify-center text-white shadow-[0_4px_10px_rgba(0,0,0,0.15),inset_0_1.5px_0_rgba(255,255,255,0.3),inset_0_-4px_0_rgba(0,0,0,0.15)] ring-1 ring-black/5 ${btn.bgClass || 'bg-[#3b82f6]'} transform transition-all duration-300 group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:shadow-[0_10px_20px_rgba(0,0,0,0.2),inset_0_1.5px_0_rgba(255,255,255,0.4),inset_0_-4px_0_rgba(0,0,0,0.15)] active:scale-95 overflow-hidden`}>
                                     {btn.iconSrc ? (
-                                        <img src={btn.iconSrc} alt={btn.name} className="w-[32px] h-[32px] object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-110 relative z-10" />
+                                        <img src={btn.iconSrc} alt={btn.name} className="w-[38px] h-[38px] object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-110 relative z-10" />
                                     ) : (
                                         <div className="relative z-10 drop-shadow-sm">{btn.icon}</div>
                                     )}
