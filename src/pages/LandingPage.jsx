@@ -106,8 +106,25 @@ const LandingPage = () => {
 
     const themeColor = design.primaryColor || '#3b82f6';
 
+    const getContrastColor = (hexcolor) => {
+        if (!hexcolor) return 'dark';
+        let hex = hexcolor.replace('#', '');
+        if (hex.length === 3) {
+            hex = hex.split('').map(x => x + x).join('');
+        }
+        if (hex.length !== 6) return 'dark';
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 2), 16);
+        const b = parseInt(hex.substring(4, 2), 16);
+        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        return yiq >= 128 ? 'light-bg' : 'dark-bg';
+    };
+
+    const isLightBg = getContrastColor(footer.backgroundColor || themeColor) === 'light-bg';
+    const activeFooterBg = footer.backgroundColor || themeColor;
+
     return (
-        <div style={{ '--theme-color': themeColor }} className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex justify-center font-sans overflow-x-hidden">
+        <div style={{ '--theme-color': themeColor, '--footer-bg': activeFooterBg, '--footer-border': `${activeFooterBg}90` }} className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex justify-center font-sans overflow-x-hidden">
             <div className="w-full max-w-[420px] sm:max-w-[600px] bg-white shadow-[0_15px_50px_rgba(0,0,0,0.08)] relative flex flex-col min-h-screen items-center">
 
                 {/* Import the new BusinessHero component here and pass strictly hero config */}
@@ -159,12 +176,12 @@ const LandingPage = () => {
                 {/* Footer and Social Overlay */}
                 <div className="relative mt-auto w-full flex flex-col items-center">
                     {/* Premium Dynamic Theme Footer */}
-                    <div style={{ backgroundColor: themeColor, borderColor: `${themeColor}90` }} className="text-center py-3 px-4 z-10 w-full relative border-t mt-auto shadow-inner">
-                        <p className="text-[12px] text-white/90 font-medium tracking-wide">
+                    <div className="bg-[var(--footer-bg)] border-t-[var(--footer-border)] text-center py-3 px-4 z-10 w-full relative mt-auto shadow-inner border-t">
+                        <p className={`text-[12px] ${isLightBg ? 'text-slate-800' : 'text-white/90'} font-medium tracking-wide`}>
                             {footer.copyright || `© 2026 ${footer.businessName || hero.company || 'Appifly Infotech'}. All Rights Reserved.`}
                         </p>
-                        <p className="mt-1 text-[11px] text-white/70 font-normal tracking-wide">
-                            Developed by <span className="font-bold text-white shadow-sm">Appifly Infotech</span>
+                        <p className={`mt-1 text-[11px] ${isLightBg ? 'text-slate-700' : 'text-white/70'} font-normal tracking-wide`}>
+                            Developed by <span className={`font-bold ${isLightBg ? 'text-slate-900' : 'text-white'} shadow-sm`}>Appifly Infotech</span>
                         </p>
                     </div>
                 </div>
