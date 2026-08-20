@@ -15,7 +15,11 @@ const LandingPage = () => {
     const [inquiryData, setInquiryData] = useState({ name: '', mobile: '', email: '', subject: '', message: '' });
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}?_t=${Date.now()}`, {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isPreview = urlParams.get('preview');
+        const queryParams = isPreview ? `?preview=true&_t=${Date.now()}` : `?_t=${Date.now()}`;
+
+        fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}${queryParams}`, {
             cache: 'no-store',
             headers: {
                 'Cache-Control': 'no-cache',
