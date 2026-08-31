@@ -25,7 +25,7 @@ const ActionButtons = () => {
     const actionButtons = [
         { name: 'Call', icon: <FaPhoneAlt />, target: 'tel:+1234567890', bg: 'bg-blue-500' },
         { name: 'WhatsApp', icon: <FaWhatsapp />, target: 'https://wa.me/1234567890', bg: 'bg-green-500' },
-        { name: 'Email', icon: <FaEnvelope />, target: 'mailto:contact@appifly.com?subject=Inquiry', bg: 'bg-red-500' },
+        { name: 'Email', icon: <FaEnvelope />, target: 'https://mail.google.com/mail/?view=cm&fs=1&to=contact@appifly.com&su=Inquiry', bg: 'bg-red-500' },
         { name: 'Website', icon: <FaGlobe />, target: 'https://www.appifly.com', bg: 'bg-indigo-500' },
         { name: 'Google Map', icon: <FaMapMarkerAlt />, target: 'https://maps.google.com/?q=Appifly+Infotech', bg: 'bg-orange-500' },
     ];
