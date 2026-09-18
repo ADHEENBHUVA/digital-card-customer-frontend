@@ -41,11 +41,10 @@ const BusinessHero = ({ hero = {} }) => {
             {/* Business Identity */}
             <div className="relative z-20 flex flex-col items-center pb-6 text-center w-full px-4">
 
-                {/* Circular Glassmorphism Logo */}
                 <div className="p-1 mb-4 rounded-full bg-white/20 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/30 transform transition-transform duration-300 hover:scale-105">
-                    {hero.logo || hero.photo ? (
+                    {getMediaUrl(hero.logo || hero.photo || hero.image) ? (
                         <img
-                            src={getMediaUrl(hero.logo || hero.photo)}
+                            src={getMediaUrl(hero.logo || hero.photo || hero.image)}
                             alt="Business Logo"
                             className="w-[96px] h-[96px] rounded-full object-cover bg-white ring-2 ring-white/50"
                         />
