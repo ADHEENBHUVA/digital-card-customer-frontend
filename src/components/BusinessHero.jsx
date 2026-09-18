@@ -5,6 +5,11 @@ const BusinessHero = ({ hero = {} }) => {
     const getMediaUrl = (url) => {
         if (!url) return '';
         if (url.startsWith('/uploads')) return `${import.meta.env.VITE_API_URL}${url}`;
+        if (url.includes('res.cloudinary.com') && url.includes('/upload/')) {
+            if (!url.includes('/upload/q_auto,f_auto/')) {
+                return url.replace('/upload/', '/upload/q_auto,f_auto/');
+            }
+        }
         return url;
     };
 

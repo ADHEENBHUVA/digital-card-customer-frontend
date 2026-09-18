@@ -17,15 +17,9 @@ const LandingPage = () => {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const isPreview = urlParams.get('preview');
-        const queryParams = isPreview ? `?preview=true&_t=${Date.now()}` : `?_t=${Date.now()}`;
+        const queryParams = isPreview ? `?preview=true&_t=${Date.now()}` : '';
 
-        fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}${queryParams}`, {
-            cache: 'no-store',
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
-            }
-        })
+        fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}${queryParams}`)
             .then(res => res.json())
             .then(info => {
                 setData(info);
@@ -52,6 +46,11 @@ const LandingPage = () => {
     const getMediaUrl = (url) => {
         if (!url) return '';
         if (url.startsWith('/uploads')) return `${import.meta.env.VITE_API_URL}${url}`;
+        if (url.includes('res.cloudinary.com') && url.includes('/upload/')) {
+            if (!url.includes('/upload/q_auto,f_auto/')) {
+                return url.replace('/upload/', '/upload/q_auto,f_auto/');
+            }
+        }
         return url;
     };
 
