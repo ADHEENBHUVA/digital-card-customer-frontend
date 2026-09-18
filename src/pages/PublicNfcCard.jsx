@@ -274,7 +274,7 @@ const PublicNfcCard = () => {
                                     )}
 
                                     {contact.email && (
-                                        <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300">
+                                        <a href={`mailto:${contact.email}`} className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300">
                                             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-red-500 flex justify-center items-center shadow-inner group-hover:scale-105 transition-transform duration-300">
                                                 <img src="https://img.icons8.com/3d-fluency/94/mail.png" className="w-6 h-6 object-contain drop-shadow-md" alt="email" />
                                             </div>

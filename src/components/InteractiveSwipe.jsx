@@ -70,8 +70,7 @@ const InteractiveSwipe = ({ buttons }) => {
                     if (btn.onClick) {
                         btn.onClick(e);
                     } else if (btn.url) {
-                        const isDeepLink = btn.url.startsWith('tel:') || btn.url.startsWith('mailto:') || btn.url.includes('wa.me');
-                        window.open(btn.url, btn.target || (isDeepLink ? '_self' : '_blank'));
+                        window.open(btn.url, btn.target || '_self');
                     }
                 } else if (positionStr === 'right') {
                     handleNext();
