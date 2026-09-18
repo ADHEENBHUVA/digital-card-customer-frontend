@@ -17,28 +17,41 @@ const PublicNfcCard = () => {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const isPreview = urlParams.get('preview');
-        const queryParams = isPreview ? `?preview=true&_t=${Date.now()}` : `?_t=${Date.now()}`;
+        const queryParams = isPreview ? `?preview=true` : ``; // Removed Date.now() to allow browser caching
+        
+        // INSTANT LOAD: Check localStorage for cached data
+        const cachedData = localStorage.getItem(`nfc_card_${token}`);
+        if (cachedData) {
+            try {
+                setData(JSON.parse(cachedData));
+                setLoading(false); // Instantly stop loading!
+            } catch(e) {}
+        }
 
-        fetch(`${import.meta.env.VITE_API_URL}/api/public/card/nfc/${token}${queryParams}`, {
-            cache: 'no-store',
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
-            }
-        })
+        fetch(`${import.meta.env.VITE_API_URL}/api/public/card/nfc/${token}${queryParams}`)
             .then(res => res.json())
             .then(info => {
+                if(info && !info.code) {
+                    localStorage.setItem(`nfc_card_${token}`, JSON.stringify(info)); // Save to cache
+                }
                 setData(info);
                 setLoading(false);
             })
             .catch(err => {
                 console.error(err);
-                setLoading(false);
+                if (!cachedData) setLoading(false);
             });
     }, [token]);
 
     if (loading) {
-        return <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8] text-slate-800">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8]">
+                <div className="relative w-24 h-24">
+                    <div className="absolute top-0 left-0 w-full h-full border-4 border-indigo-200 rounded-full animate-ping"></div>
+                    <div className="absolute top-0 left-0 w-full h-full border-4 border-indigo-500 rounded-full animate-spin border-t-transparent"></div>
+                </div>
+            </div>
+        );
     }
 
     if (!data || data.code) {
