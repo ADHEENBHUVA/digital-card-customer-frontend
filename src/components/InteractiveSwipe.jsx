@@ -67,8 +67,12 @@ const InteractiveSwipe = ({ buttons }) => {
 
             const handleNodeClick = (e) => {
                 if (isCenter) {
-                    if (btn.onClick) btn.onClick(e);
-                    else if (btn.url) window.open(btn.url, btn.target || '_blank');
+                    if (btn.onClick) {
+                        btn.onClick(e);
+                    } else if (btn.url) {
+                        const isDeepLink = btn.url.startsWith('tel:') || btn.url.startsWith('mailto:') || btn.url.includes('wa.me');
+                        window.open(btn.url, btn.target || (isDeepLink ? '_self' : '_blank'));
+                    }
                 } else if (positionStr === 'right') {
                     handleNext();
                 } else if (positionStr === 'left') {

@@ -40,10 +40,15 @@ const DynamicGrid = ({ buttons }) => {
                             </div>
                         );
 
+                        const isDeepLink = (url) => {
+                            if (!url) return false;
+                            return url.startsWith('tel:') || url.startsWith('mailto:') || url.includes('wa.me');
+                        };
+
                         if (btn.onClick) {
                             return <button key={btn.id || index} type="button" onClick={btn.onClick} className="focus:outline-none flex-1 flex justify-center">{content}</button>;
                         }
-                        return <a key={btn.id || index} href={btn.url || btn.action} target={btn.target || '_blank'} rel="noopener noreferrer" className="flex-1 flex justify-center">{content}</a>;
+                        return <a key={btn.id || index} href={btn.url || btn.action} target={btn.target || (isDeepLink(btn.url || btn.action) ? '_self' : '_blank')} rel="noopener noreferrer" className="flex-1 flex justify-center">{content}</a>;
                     })}
                 </div>
             ))}
