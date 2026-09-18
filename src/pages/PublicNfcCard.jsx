@@ -199,7 +199,7 @@ const PublicNfcCard = () => {
                     { name: 'Profile', iconSrc: 'https://img.icons8.com/3d-fluency/94/user-male-circle.png', onClick: () => setShowProfile(true), condition: true },
                     { name: 'Call', icon: <FaPhoneAlt size={22} />, bgClass: 'bg-gradient-to-tr from-[#e53935] to-[#ff5252]', url: contact.phone ? `tel:${formatPhoneURL(contact.phone)}` : '', condition: !!contact.phone },
                     { name: 'WhatsApp', icon: <FaWhatsapp size={26} />, bgClass: 'bg-gradient-to-tr from-[#128C7E] to-[#25D366]', url: contact.whatsapp ? `https://wa.me/${formatWhatsAppURL(contact.whatsapp)}` : '', condition: !!contact.whatsapp },
-                    { name: 'Email', iconSrc: 'https://img.icons8.com/3d-fluency/94/mail.png', url: contact.email ? `https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}` : '', condition: !!contact.email },
+                    { name: 'Email', iconSrc: 'https://img.icons8.com/3d-fluency/94/mail.png', url: contact.email ? `mailto:${contact.email}` : '', condition: !!contact.email },
                     { name: 'Website', icon: <FaGlobe size={24} />, bgClass: 'bg-gradient-to-tr from-[#1976D2] to-[#42A5F5]', url: contact.website, condition: !!contact.website },
                     { name: 'Inquiry', iconSrc: 'https://img.icons8.com/3d-fluency/94/comments.png', url: contact.inquiry, condition: !!contact.inquiry }
                 ].filter(btn => btn.condition)} />
