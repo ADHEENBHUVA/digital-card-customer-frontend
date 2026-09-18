@@ -180,7 +180,7 @@ const PublicNfcCard = () => {
                     { name: 'Location', iconSrc: 'https://img.icons8.com/color/96/google-maps-new.png', bgClass: 'bg-white', url: contact.maps || contact.googleMap, condition: !!(contact.maps || contact.googleMap) },
                     { name: 'Website', icon: <FaGlobe size={24} />, bgClass: 'bg-gradient-to-tr from-[#1976D2] to-[#42A5F5]', url: contact.website, condition: !!contact.website },
 
-                    { name: 'Email', icon: <FaEnvelope size={24} />, bgClass: 'bg-gradient-to-tr from-[#0A84FF] to-[#369cff]', url: contact.email ? `https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}` : '', condition: !!contact.email },
+                    { name: 'Email', icon: <FaEnvelope size={24} />, bgClass: 'bg-gradient-to-tr from-[#0A84FF] to-[#369cff]', url: contact.email ? `mailto:${contact.email}` : '', condition: !!contact.email },
 
                     { name: 'Facebook', icon: <FaFacebookF size={22} />, bgClass: 'bg-gradient-to-tr from-[#1877F2] to-[#3b5998]', url: socialLinks.facebook, condition: !!socialLinks.facebook },
                     { name: 'Instagram', icon: <FaInstagram size={22} />, bgClass: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]', url: socialLinks.instagram, condition: !!socialLinks.instagram },
