@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import QRCode from 'react-qr-code';
 import { FaPhoneAlt, FaWhatsapp, FaGlobe, FaShareAlt, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter, FaTelegramPlane, FaMapMarkerAlt, FaEnvelope, FaQrcode, FaAddressBook, FaRegCommentDots } from 'react-icons/fa';
 import BusinessHero from '../components/BusinessHero';
 import DynamicGrid from '../components/DynamicGrid';
@@ -161,7 +162,7 @@ const PublicNfcCard = () => {
                     <div className="w-full px-6 py-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
                         <div className="bg-white/60 backdrop-blur-sm shadow-sm border border-white/80 rounded-2xl p-5 text-center">
                             <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">About</h3>
-                            <p className="text-slate-700 text-[15px] leading-relaxed whitespace-pre-line">
+                            <p className="text-slate-700 text-[15px] leading-relaxed whitespace-pre-line break-words">
                                 {mainSection.about}
                             </p>
                         </div>
@@ -251,7 +252,7 @@ const PublicNfcCard = () => {
                                             <FaGlobe size={64} style={{ color: themeColor }} />
                                         </div>
                                         <h4 className="text-[11px] font-black uppercase tracking-widest mb-2 flex items-center gap-1.5" style={{ color: themeColor }}><FaGlobe size={11} /> Company Details</h4>
-                                        <p className="text-[13px] text-slate-600 leading-relaxed font-semibold relative z-10">{mainSection.about || hero.tagline}</p>
+                                        <p className="text-[13px] text-slate-600 leading-relaxed font-semibold relative z-10 break-words">{mainSection.about || hero.tagline}</p>
                                     </div>
                                 )}
 
@@ -339,8 +340,8 @@ const PublicNfcCard = () => {
                             <h3 className="text-xl font-bold text-slate-800 mb-1">Scan QR Code</h3>
                             <p className="text-sm text-slate-500 mb-6 text-center">Share this card instantly by scanning the code below</p>
 
-                            <div className="p-3 bg-white border-2 border-slate-100 rounded-2xl shadow-sm mb-6">
-                                {data.qrCodeUrl && <img src={`${import.meta.env.VITE_API_URL}${data.qrCodeUrl}`} alt="QR Code" className="w-[200px] h-[200px] object-contain" />}
+                            <div className="p-3 bg-white border-2 border-slate-100 rounded-2xl shadow-sm mb-6 flex justify-center items-center">
+                                <QRCode value={window.location.href} size={200} bgColor="#ffffff" fgColor="#000000" />
                             </div>
 
                             <button onClick={() => setShowQR(false)} className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors">
