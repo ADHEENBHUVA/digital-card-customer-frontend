@@ -1,7 +1,11 @@
 export const handleQRShare = async (url) => {
     try {
-        const svg = document.getElementById("qr-code-svg");
-        if (!svg) throw new Error("QR Code not found");
+        const originalSvg = document.getElementById("qr-code-svg");
+        if (!originalSvg) throw new Error("QR Code not found");
+
+        const svg = originalSvg.cloneNode(true);
+        svg.setAttribute("width", "1000");
+        svg.setAttribute("height", "1000");
 
         const svgData = new XMLSerializer().serializeToString(svg);
         const canvas = document.createElement("canvas");
@@ -10,11 +14,12 @@ export const handleQRShare = async (url) => {
 
         await new Promise((resolve, reject) => {
             img.onload = () => {
-                canvas.width = img.width + 40;
-                canvas.height = img.height + 40;
+                const padding = 100;
+                canvas.width = img.width + (padding * 2);
+                canvas.height = img.height + (padding * 2);
                 ctx.fillStyle = "#ffffff";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 20, 20);
+                ctx.drawImage(img, padding, padding);
                 resolve();
             };
             img.onerror = reject;
