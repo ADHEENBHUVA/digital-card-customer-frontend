@@ -50,27 +50,15 @@ const PublicNfcCard = () => {
         const isPreview = urlParams.get('preview');
         const queryParams = isPreview ? `?preview=true` : ``; // Removed Date.now() to allow browser caching
         
-        // INSTANT LOAD: Check localStorage for cached data
-        const cachedData = localStorage.getItem(`nfc_card_${token}`);
-        if (cachedData) {
-            try {
-                setData(JSON.parse(cachedData));
-                setLoading(false); // Instantly stop loading!
-            } catch(e) {}
-        }
-
         fetch(`${import.meta.env.VITE_API_URL}/api/public/card/nfc/${token}${queryParams}`)
             .then(res => res.json())
             .then(info => {
-                if(info && !info.code) {
-                    localStorage.setItem(`nfc_card_${token}`, JSON.stringify(info)); // Save to cache
-                }
                 setData(info);
                 setLoading(false);
             })
             .catch(err => {
                 console.error(err);
-                if (!cachedData) setLoading(false);
+                setLoading(false);
             });
     }, [token]);
 
