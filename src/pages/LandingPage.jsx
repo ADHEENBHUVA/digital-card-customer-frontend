@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaPhoneAlt, FaWhatsapp, FaGlobe, FaShareAlt, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter, FaTelegramPlane, FaMapMarkerAlt, FaEnvelope, FaQrcode, FaAddressBook, FaRegCommentDots } from 'react-icons/fa';
+import QRCode from 'react-qr-code';
+import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaGlobe, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter, FaTelegramPlane, FaMapMarkerAlt, FaShareAlt, FaQrcode, FaAddressBook } from 'react-icons/fa';
 import BusinessHero from '../components/BusinessHero';
 import DynamicGrid from '../components/DynamicGrid';
 import InteractiveSwipe from '../components/InteractiveSwipe';
@@ -383,7 +384,7 @@ const LandingPage = () => {
                             <p className="text-sm text-slate-500 mb-6 text-center">Share this card instantly by scanning the code below</p>
 
                             <div className="p-3 bg-white border-2 border-slate-100 rounded-2xl shadow-sm mb-6">
-                                {data.qrCodeUrl && <img src={`${import.meta.env.VITE_API_URL}${data.qrCodeUrl}`} alt="QR Code" className="w-[200px] h-[200px] object-contain" />}
+                                <QRCode value={window.location.href} size={200} bgColor="#ffffff" fgColor="#000000" />
                             </div>
 
                             <button onClick={() => setShowQR(false)} className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors">
