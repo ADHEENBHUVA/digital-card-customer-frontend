@@ -11,20 +11,15 @@ const InteractiveSwipe = ({ buttons }) => {
 
     const onTouchStart = (e) => {
         setTouchEndX(null); // Reset
-        setTouchStartX(e.targetTouches ? e.targetTouches[0].clientX : e.clientX);
+        setTouchStartX(e.targetTouches[0].clientX);
     };
 
     const onTouchMove = (e) => {
-        if (!touchStartX) return; // Prevent move if not started
-        setTouchEndX(e.targetTouches ? e.targetTouches[0].clientX : e.clientX);
+        setTouchEndX(e.targetTouches[0].clientX);
     };
 
     const onTouchEnd = () => {
-        if (!touchStartX || !touchEndX) {
-            setTouchStartX(null);
-            setTouchEndX(null);
-            return;
-        }
+        if (!touchStartX || !touchEndX) return;
         const distance = touchStartX - touchEndX;
         const isLeftSwipe = distance > minSwipeDistance;
         const isRightSwipe = distance < -minSwipeDistance;
@@ -34,9 +29,6 @@ const InteractiveSwipe = ({ buttons }) => {
         } else if (isRightSwipe) {
             handlePrev();
         }
-        
-        setTouchStartX(null);
-        setTouchEndX(null);
     };
 
     const handleNext = () => {
@@ -76,28 +68,23 @@ const InteractiveSwipe = ({ buttons }) => {
             const handleNodeClick = (e) => {
                 if (isCenter) {
                     if (btn.onClick) {
-                        e.preventDefault();
                         btn.onClick(e);
+                    } else if (btn.url) {
+                        if (btn.url.startsWith('tel:') || btn.url.startsWith('mailto:') || btn.url.includes('wa.me')) {
+                            window.location.href = btn.url;
+                        } else {
+                            window.open(btn.url, btn.target || '_blank');
+                        }
                     }
-                    // For URL, the <a> tag natively handles it, no need for window.open
                 } else if (positionStr === 'right') {
-                    e.preventDefault();
                     handleNext();
                 } else if (positionStr === 'left') {
-                    e.preventDefault();
                     handlePrev();
                 }
             };
 
-            const Element = (isCenter && btn.url) ? 'a' : 'div';
-            const linkProps = (isCenter && btn.url) ? { 
-                href: btn.url, 
-                target: (btn.url.startsWith('http') && !btn.url.includes('wa.me')) ? '_blank' : '_self',
-                rel: 'noopener noreferrer'
-            } : {};
-
             return (
-                <Element key={btn.name} className={containerStyles} onClick={handleNodeClick} {...linkProps}>
+                <div key={btn.name} className={containerStyles} onClick={handleNodeClick}>
                     <div className={`relative rounded-full flex items-center justify-center text-white ${isCenter ? 'w-[72px] h-[72px] shadow-[0_15px_35px_rgba(0,0,0,0.15)]' : 'w-[56px] h-[56px] shadow-[0_5px_15px_rgba(0,0,0,0.1)]'} ${btn.bgClass || 'bg-[#3b82f6]'} transition-all duration-500`}>
                         {btn.iconSrc ? (
                             <img src={btn.iconSrc} alt={btn.name} className={`${isCenter ? 'w-[38px] h-[38px] scale-105' : 'w-[28px] h-[28px]'} object-contain drop-shadow-sm z-10 relative transition-all duration-500`} />
@@ -108,7 +95,7 @@ const InteractiveSwipe = ({ buttons }) => {
                     <span className={`mt-5 font-bold tracking-wider uppercase text-[#1a2b4c] whitespace-nowrap transition-all duration-500 ${isCenter ? 'text-[14px] opacity-100 drop-shadow-sm' : 'text-[11px] opacity-0 relative top-6'}`}>
                         {btn.name}
                     </span>
-                </Element>
+                </div>
             );
         });
     };
@@ -119,14 +106,10 @@ const InteractiveSwipe = ({ buttons }) => {
             <h3 className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-6">Swipe for Actions</h3>
 
             <div
-                className="w-full max-w-[420px] h-[160px] relative overflow-visible bg-transparent select-none touch-pan-y cursor-grab active:cursor-grabbing"
+                className="w-full max-w-[420px] h-[160px] relative overflow-visible bg-transparent select-none touch-pan-y"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
-                onMouseDown={onTouchStart}
-                onMouseMove={onTouchMove}
-                onMouseUp={onTouchEnd}
-                onMouseLeave={onTouchEnd}
             >
                 {/* Render ALL nodes to allow seamless CSS transitions when classes shift */}
                 {renderNodes()}
