@@ -46,7 +46,18 @@ const PublicNfcCard = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0]"></div>
+            <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex flex-col items-center justify-center">
+                <div className="relative flex justify-center items-center">
+                    <div className="w-16 h-16 border-4 border-slate-200 rounded-full"></div>
+                    <div className="w-16 h-16 border-4 border-blue-500 rounded-full border-t-transparent animate-spin absolute top-0 left-0"></div>
+                </div>
+                <div className="mt-5 text-sm font-bold tracking-widest text-slate-500 uppercase flex items-center gap-1">
+                    Loading
+                    <span className="animate-[bounce_1.4s_infinite] inline-block">.</span>
+                    <span className="animate-[bounce_1.4s_infinite] inline-block" style={{animationDelay: '200ms'}}>.</span>
+                    <span className="animate-[bounce_1.4s_infinite] inline-block" style={{animationDelay: '400ms'}}>.</span>
+                </div>
+            </div>
         );
     }
 
