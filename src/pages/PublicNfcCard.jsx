@@ -6,6 +6,32 @@ import BusinessHero from '../components/BusinessHero';
 import DynamicGrid from '../components/DynamicGrid';
 import InteractiveSwipe from '../components/InteractiveSwipe';
 
+const SocialIcon = ({ icon: Icon, label, color, iconColor = 'text-white', href, target, onClick }) => {
+    const innerContent = (
+        <>
+            <div className={`w-[60px] h-[60px] ${color} ${iconColor} rounded-[1.25rem] flex items-center justify-center shadow-lg group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`} style={{ boxShadow: '0 8px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}>
+                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <Icon size={30} className="relative z-10" />
+            </div>
+            <span className="text-[12px] mt-1 font-bold text-slate-700 text-center tracking-tight">{label}</span>
+        </>
+    );
+
+    if (href) {
+        return (
+            <a href={href} target={target} rel={target === '_blank' ? 'noopener noreferrer' : undefined} className="flex flex-col items-center gap-1 group">
+                {innerContent}
+            </a>
+        );
+    }
+
+    return (
+        <button onClick={onClick} className="flex flex-col items-center gap-1 group">
+            {innerContent}
+        </button>
+    );
+};
+
 const PublicNfcCard = () => {
     const { token } = useParams();
     const [data, setData] = useState(null);
