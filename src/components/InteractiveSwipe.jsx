@@ -117,7 +117,7 @@ const InteractiveSwipe = ({ buttons }) => {
     };
 
     return (
-        <div className="w-full flex-grow bg-slate-50 pt-4 pb-4 relative flex flex-col items-center border-b border-slate-200">
+        <div className="w-full flex-grow bg-slate-50 pt-10 pb-4 relative flex flex-col items-center border-t border-slate-200 rounded-t-[3rem] shadow-[0_-10px_30px_rgba(0,0,0,0.04)] mt-6">
             <div
                 className="w-full max-w-[420px] h-[120px] relative overflow-visible bg-transparent select-none touch-pan-y"
                 onTouchStart={onTouchStart}
