@@ -204,15 +204,15 @@ const LandingPage = () => {
                             const actionButtons = [
                                 contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-b from-[#5be169] to-[#2fd341]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />,
                                 contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-b from-[#5ce177] to-[#24cc54]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />,
-                                (contact.maps || contact.googleMap) && <SocialIcon iconSrc="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" label="Location" color="bg-white" href={contact.maps || contact.googleMap} target="_blank" />,
-                                contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={contact.website} target="_blank" />,
+                                (contact.maps || contact.googleMap) && <SocialIcon iconSrc="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" label="Location" color="bg-white" href={contact.maps || contact.googleMap} target="_top" />,
+                                contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={contact.website} target="_top" />,
                                 contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={`mailto:${contact.email}`} target="_top" />,
-                                socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-b from-[#4970c6] to-[#2b4c9b]" href={socialLinks.facebook} target="_blank" />,
-                                socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#ffdf8a] via-[#f73752] to-[#c726a4]" href={socialLinks.instagram} target="_blank" />,
-                                socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-gradient-to-b from-[#0a81ba] to-[#046594]" href={socialLinks.linkedin} target="_blank" />,
-                                socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-gradient-to-b from-[#f93737] to-[#d61313]" href={socialLinks.youtube} target="_blank" />,
-                                socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-gradient-to-b from-[#45b7f7] to-[#1796df]" href={socialLinks.twitter} target="_blank" />,
-                                socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-gradient-to-b from-[#1b9fe3] to-[#0d7ebd]" href={socialLinks.telegram} target="_blank" />,
+                                socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-b from-[#4970c6] to-[#2b4c9b]" href={socialLinks.facebook} target="_top" />,
+                                socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#ffdf8a] via-[#f73752] to-[#c726a4]" href={socialLinks.instagram} target="_top" />,
+                                socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-gradient-to-b from-[#0a81ba] to-[#046594]" href={socialLinks.linkedin} target="_top" />,
+                                socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-gradient-to-b from-[#f93737] to-[#d61313]" href={socialLinks.youtube} target="_top" />,
+                                socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-gradient-to-b from-[#45b7f7] to-[#1796df]" href={socialLinks.twitter} target="_top" />,
+                                socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-gradient-to-b from-[#1b9fe3] to-[#0d7ebd]" href={socialLinks.telegram} target="_top" />,
                                 <SocialIcon icon={FaQrcode} label="QrCode" color="bg-gradient-to-b from-[#bc62f6] to-[#9132d4]" onClick={() => setShowQR(true)} />,
                                 <SocialIcon icon={FaAddressBook} label="Save Contact" color="bg-gradient-to-b from-[#1dbba4] to-[#0e9682]" onClick={generateVCard} />,
                                 <SocialIcon icon={FaShareAlt} label="Share" color="bg-gradient-to-b from-[#ffb43c] to-[#f48a10]" onClick={handleShare} />
@@ -318,7 +318,7 @@ const LandingPage = () => {
                                       )}
 
                                       {contact.email && (
-                                          <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                          <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`} target="_top" rel="noopener noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
                                               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-red-500 flex justify-center items-center shadow-md shadow-red-500/20 group-hover:scale-105 transition-transform duration-300">
                                                   <img src="https://img.icons8.com/3d-fluency/94/mail.png" className="w-6 h-6 object-contain drop-shadow-md" alt="email" />
                                               </div>
@@ -330,7 +330,7 @@ const LandingPage = () => {
                                       )}
 
                                       {contact.website && (
-                                          <a href={contact.website} target="_blank" rel="noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                          <a href={contact.website} target="_top" rel="noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
                                               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-600 flex justify-center items-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
                                                   <FaGlobe className="text-white drop-shadow-md" size={18} />
                                               </div>
@@ -354,7 +354,7 @@ const LandingPage = () => {
                                       )}
 
                                       {(contact.maps || contact.googleMap) && (
-                                          <a href={contact.maps || contact.googleMap || '#'} target="_blank" rel="noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                          <a href={contact.maps || contact.googleMap || '#'} target="_top" rel="noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
                                               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex justify-center items-center shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform duration-300">
                                                   <img src="https://img.icons8.com/3d-fluency/94/map-marker.png" className="w-6 h-6 object-contain drop-shadow-md" alt="location" />
                                               </div>
