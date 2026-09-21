@@ -9,11 +9,11 @@ import InteractiveSwipe from '../components/InteractiveSwipe';
 const SocialIcon = ({ icon: Icon, label, color, iconColor = 'text-white', href, target, onClick }) => {
     const innerContent = (
         <>
-            <div className={`w-[60px] h-[60px] ${color} ${iconColor} rounded-[1.25rem] flex items-center justify-center shadow-lg group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`} style={{ boxShadow: '0 8px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}>
+            <div className={`w-[58px] h-[58px] ${color} ${iconColor} rounded-[22px] flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`}>
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <Icon size={30} className="relative z-10" />
+                <Icon size={26} className="relative z-10" />
             </div>
-            <span className="text-[12px] mt-1 font-bold text-slate-700 text-center tracking-tight">{label}</span>
+            <span className="text-[12px] mt-1.5 font-bold text-[#0f2e53] text-center tracking-tight leading-none">{label}</span>
         </>
     );
 
@@ -209,22 +209,22 @@ const PublicNfcCard = () => {
                 {/* Main Action Buttons Grid */}
                 <div className="w-full px-6 py-4">
                     <div className="grid grid-cols-4 gap-y-6 gap-x-2">
-                        {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-tr from-[#34C759] to-[#30d158]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />}
-                        {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-tr from-[#25D366] to-[#43d879]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />}
-                        {(contact.maps || contact.googleMap) && <SocialIcon icon={FaMapMarkerAlt} label="Location" color="bg-white" iconColor="text-red-500" href={contact.maps || contact.googleMap} target="_blank" />}
-                        {contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-tr from-[#1976D2] to-[#42A5F5]" href={contact.website} target="_blank" />}
-                        {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-tr from-[#0A84FF] to-[#369cff]" href={`mailto:${contact.email}`} target="_top" />}
+                        {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-[#1fc54a]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />}
+                        {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-[#25D366]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />}
+                        {(contact.maps || contact.googleMap) && <SocialIcon icon={FaMapMarkerAlt} label="Location" color="bg-white shadow-[0_2px_10px_rgba(0,0,0,0.08)]" iconColor="text-[#ea4335]" href={contact.maps || contact.googleMap} target="_blank" />}
+                        {contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-[#2a87f5]" href={contact.website} target="_blank" />}
+                        {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-[#2a87f5]" href={`mailto:${contact.email}`} target="_top" />}
                         
-                        {socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-tr from-[#1877F2] to-[#3b5998]" href={socialLinks.facebook} target="_blank" />}
+                        {socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-[#3b5998]" href={socialLinks.facebook} target="_blank" />}
                         {socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]" href={socialLinks.instagram} target="_blank" />}
-                        {socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-gradient-to-tr from-[#0077b5] to-[#005582]" href={socialLinks.linkedin} target="_blank" />}
-                        {socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-gradient-to-tr from-[#FF0000] to-[#c4302b]" href={socialLinks.youtube} target="_blank" />}
-                        {socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-gradient-to-tr from-[#1DA1F2] to-[#1a91da]" href={socialLinks.twitter} target="_blank" />}
-                        {socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-gradient-to-tr from-[#0088cc] to-[#0077b5]" href={socialLinks.telegram} target="_blank" />}
+                        {socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-[#0077b5]" href={socialLinks.linkedin} target="_blank" />}
+                        {socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-[#ff0000]" href={socialLinks.youtube} target="_blank" />}
+                        {socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-[#1da1f2]" href={socialLinks.twitter} target="_blank" />}
+                        {socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-[#0088cc]" href={socialLinks.telegram} target="_blank" />}
                         
-                        <SocialIcon icon={FaQrcode} label="QrCode" color="bg-gradient-to-tr from-[#8a2be2] to-[#9c42ed]" onClick={() => setShowQR(true)} />
-                        <SocialIcon icon={FaAddressBook} label="Save Contact" color="bg-gradient-to-tr from-[#009688] to-[#26a69a]" onClick={generateVCard} />
-                        <SocialIcon icon={FaShareAlt} label="Share" color="bg-gradient-to-tr from-[#FF9500] to-[#ffa733]" onClick={handleShare} />
+                        <SocialIcon icon={FaQrcode} label="QrCode" color="bg-[#a63cfc]" onClick={() => setShowQR(true)} />
+                        <SocialIcon icon={FaAddressBook} label="Save Contact" color="bg-[#0f9d8a]" onClick={generateVCard} />
+                        <SocialIcon icon={FaShareAlt} label="Share" color="bg-[#ff9500]" onClick={handleShare} />
                     </div>
                 </div>
 
