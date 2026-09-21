@@ -199,7 +199,7 @@ const LandingPage = () => {
                 )}
 
                 {/* Main Action Buttons Grid */}
-                <div className="w-full px-2 py-4">
+                <div className="w-full px-2 pt-4 pb-10 mb-4">
                     <div className="flex flex-wrap justify-center gap-y-7">
                         {(() => {
                             const actionButtons = [
