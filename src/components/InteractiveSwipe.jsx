@@ -101,12 +101,12 @@ const InteractiveSwipe = ({ buttons }) => {
     };
 
     return (
-        <div className="w-full flex-grow bg-slate-50 pt-8 pb-12 relative flex flex-col items-center border-b border-slate-200">
+        <div className="w-full flex-grow bg-slate-50 pt-8 pb-4 relative flex flex-col items-center border-b border-slate-200">
 
-            <h3 className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-6">Swipe for Actions</h3>
+            <h3 className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-4">Swipe for Actions</h3>
 
             <div
-                className="w-full max-w-[420px] h-[160px] relative overflow-visible bg-transparent select-none touch-pan-y"
+                className="w-full max-w-[420px] h-[120px] relative overflow-visible bg-transparent select-none touch-pan-y"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
