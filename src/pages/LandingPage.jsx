@@ -17,22 +17,48 @@ const LandingPage = () => {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const isPreview = urlParams.get('preview');
-        const queryParams = isPreview ? `?preview=true&_t=${Date.now()}` : '';
+        const queryParams = isPreview ? `?preview=true` : ''; // Remove timestamp to allow browser caching
+        
+        // INSTANT LOAD: Check localStorage for cached data
+        const cachedData = localStorage.getItem(`landing_card_${slug}`);
+        if (cachedData) {
+            try {
+                setData(JSON.parse(cachedData));
+                setLoading(false); // Instantly stop loading!
+            } catch(e) {}
+        }
 
         fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}${queryParams}`)
             .then(res => res.json())
             .then(info => {
+                if(info && !info.message) {
+                    localStorage.setItem(`landing_card_${slug}`, JSON.stringify(info)); // Save to cache
+                }
                 setData(info);
                 setLoading(false);
             })
             .catch(err => {
                 console.error(err);
-                setLoading(false);
+                if (!cachedData) setLoading(false);
             });
     }, [slug]);
 
-    if (loading || !data || data.message === 'Digital Card not found') {
-        return <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8] text-slate-800">{loading ? 'Loading...' : 'Digital Card Not Found'}</div>;
+    if (loading) {
+        return <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0]"></div>;
+    }
+
+    if (!data || data.message === 'Digital Card not found') {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8] font-sans px-4">
+                <div className="bg-white p-8 rounded-3xl shadow-xl max-w-sm w-full border border-slate-100 text-center animate-in zoom-in duration-300">
+                    <div className="w-16 h-16 bg-rose-100 text-rose-500 rounded-2xl flex items-center justify-center mx-auto mb-5 rotate-12">
+                        <FaQrcode size={28} className="-rotate-12" />
+                    </div>
+                    <h2 className="text-2xl font-black text-slate-800 mb-2 tracking-tight">Notice</h2>
+                    <p className="text-slate-500 font-medium leading-relaxed">Digital Card Not Found</p>
+                </div>
+            </div>
+        );
     }
 
     // Strict extraction of strictly isolated DigitalCard fields
