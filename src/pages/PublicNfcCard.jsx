@@ -8,15 +8,15 @@ import InteractiveSwipe from '../components/InteractiveSwipe';
 
 const SocialIcon = ({ icon: Icon, iconSrc, label, color, iconColor = 'text-white', href, target, onClick }) => {
     const innerContent = (
-        <div className="flex flex-col items-center justify-center group w-[76px]">
-            <div className={`w-[62px] h-[62px] ${color} ${iconColor} rounded-[20px] flex items-center justify-center shadow-[0_12px_20px_-8px_rgba(0,0,0,0.3)] hover:scale-105 transition-all duration-300 relative`}>
+        <div className="flex flex-col items-center justify-center group w-[68px]">
+            <div className={`w-[54px] h-[54px] ${color} ${iconColor} rounded-[16px] flex items-center justify-center shadow-[0_10px_16px_-6px_rgba(0,0,0,0.3)] hover:scale-105 transition-all duration-300 relative`}>
                 {iconSrc ? (
-                    <img src={iconSrc} alt={label} className="w-[34px] h-[34px] object-contain relative z-10" />
+                    <img src={iconSrc} alt={label} className="w-[28px] h-[28px] object-contain relative z-10" />
                 ) : (
-                    <Icon size={30} className="relative z-10" />
+                    <Icon size={26} className="relative z-10" />
                 )}
             </div>
-            <span className="text-[13px] mt-2.5 font-bold text-[#334155] text-center tracking-tight">{label}</span>
+            <span className="text-[12px] mt-2 font-bold text-[#334155] text-center tracking-tight">{label}</span>
         </div>
     );
 
