@@ -49,20 +49,9 @@ const LandingPage = () => {
         const isPreview = urlParams.get('preview');
         const queryParams = isPreview ? `?preview=true` : ''; // Remove timestamp to allow browser caching
         
-        // INSTANT LOAD: Check localStorage for cached data
-        const cachedData = localStorage.getItem(`landing_card_${slug}`);
-        if (cachedData) {
-            try {
-                setData(JSON.parse(cachedData));
-            } catch(e) {}
-        }
-
         fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}${queryParams}`)
             .then(res => res.json())
             .then(info => {
-                if(info && !info.message) {
-                    localStorage.setItem(`landing_card_${slug}`, JSON.stringify(info)); // Save to cache
-                }
                 setData(info);
             })
             .catch(err => {
