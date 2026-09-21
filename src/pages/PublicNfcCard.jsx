@@ -387,9 +387,29 @@ const PublicNfcCard = () => {
                                 <QRCode value={window.location.href} size={200} bgColor="#ffffff" fgColor="#000000" />
                             </div>
 
-                            <button onClick={() => setShowQR(false)} className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors">
-                                Close
-                            </button>
+                            <div className="flex w-full gap-3">
+                                <button onClick={async () => {
+                                    if (navigator.share) {
+                                        try {
+                                            await navigator.share({
+                                                title: 'Digital Card',
+                                                text: 'Check out my Digital Card!',
+                                                url: window.location.href,
+                                            });
+                                        } catch (error) {
+                                            console.log('Error sharing', error);
+                                        }
+                                    } else {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        alert('Link copied to clipboard!');
+                                    }
+                                }} className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-md shadow-blue-500/20 active:scale-[0.98]">
+                                    Share
+                                </button>
+                                <button onClick={() => setShowQR(false)} className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors active:scale-[0.98]">
+                                    Close
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
