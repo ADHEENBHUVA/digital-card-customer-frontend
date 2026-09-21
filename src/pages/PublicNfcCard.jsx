@@ -6,12 +6,16 @@ import BusinessHero from '../components/BusinessHero';
 import DynamicGrid from '../components/DynamicGrid';
 import InteractiveSwipe from '../components/InteractiveSwipe';
 
-const SocialIcon = ({ icon: Icon, label, color, iconColor = 'text-white', href, target, onClick }) => {
+const SocialIcon = ({ icon: Icon, iconSrc, label, color, iconColor = 'text-white', href, target, onClick }) => {
     const innerContent = (
         <>
             <div className={`w-[58px] h-[58px] ${color} ${iconColor} rounded-[22px] flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`}>
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <Icon size={26} className="relative z-10" />
+                {iconSrc ? (
+                    <img src={iconSrc} alt={label} className="w-[34px] h-[34px] object-contain relative z-10 drop-shadow-sm" />
+                ) : (
+                    <Icon size={26} className="relative z-10" />
+                )}
             </div>
             <span className="text-[12px] mt-1.5 font-bold text-[#0f2e53] text-center tracking-tight leading-none">{label}</span>
         </>
@@ -211,7 +215,7 @@ const PublicNfcCard = () => {
                     <div className="grid grid-cols-4 gap-y-6 gap-x-2">
                         {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-[#1fc54a]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />}
                         {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-[#25D366]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />}
-                        {(contact.maps || contact.googleMap) && <SocialIcon icon={FaMapMarkerAlt} label="Location" color="bg-white shadow-[0_2px_10px_rgba(0,0,0,0.08)]" iconColor="text-[#ea4335]" href={contact.maps || contact.googleMap} target="_blank" />}
+                        {(contact.maps || contact.googleMap) && <SocialIcon iconSrc="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" label="Google Map" color="bg-white shadow-[0_2px_10px_rgba(0,0,0,0.08)]" href={contact.maps || contact.googleMap} target="_blank" />}
                         {contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-[#2a87f5]" href={contact.website} target="_blank" />}
                         {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-[#2a87f5]" href={`mailto:${contact.email}`} target="_top" />}
                         
