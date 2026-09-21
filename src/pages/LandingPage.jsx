@@ -39,7 +39,6 @@ const SocialIcon = ({ icon: Icon, iconSrc, label, color, iconColor = 'text-white
 const LandingPage = () => {
     const { slug } = useParams();
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [showQR, setShowQR] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
     const [showInquiry, setShowInquiry] = useState(false);
@@ -50,33 +49,29 @@ const LandingPage = () => {
         const isPreview = urlParams.get('preview');
         const queryParams = isPreview ? `?preview=true` : ''; // Remove timestamp to allow browser caching
         
+        // INSTANT LOAD: Check localStorage for cached data
+        const cachedData = localStorage.getItem(`landing_card_${slug}`);
+        if (cachedData) {
+            try {
+                setData(JSON.parse(cachedData));
+            } catch(e) {}
+        }
+
         fetch(`${import.meta.env.VITE_API_URL}/api/public/profile/${slug}${queryParams}`)
             .then(res => res.json())
             .then(info => {
+                if(info && !info.message) {
+                    localStorage.setItem(`landing_card_${slug}`, JSON.stringify(info)); // Save to cache
+                }
                 setData(info);
-                setLoading(false);
             })
             .catch(err => {
                 console.error(err);
-                setLoading(false);
             });
     }, [slug]);
 
-    if (loading) {
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex flex-col items-center justify-center">
-                <div className="relative flex justify-center items-center">
-                    <div className="w-16 h-16 border-4 border-slate-200 rounded-full"></div>
-                    <div className="w-16 h-16 border-4 border-blue-500 rounded-full border-t-transparent animate-spin absolute top-0 left-0"></div>
-                </div>
-                <div className="mt-5 text-sm font-bold tracking-widest text-slate-500 uppercase flex items-center gap-1">
-                    Loading
-                    <span className="animate-[bounce_1.4s_infinite] inline-block">.</span>
-                    <span className="animate-[bounce_1.4s_infinite] inline-block" style={{animationDelay: '200ms'}}>.</span>
-                    <span className="animate-[bounce_1.4s_infinite] inline-block" style={{animationDelay: '400ms'}}>.</span>
-                </div>
-            </div>
-        );
+    if (!data) {
+        return <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0]"></div>;
     }
 
     if (!data || data.message === 'Digital Card not found') {
