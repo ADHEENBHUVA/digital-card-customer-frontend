@@ -193,8 +193,8 @@ const PublicNfcCard = () => {
                 )}
 
                 {/* Main Action Buttons Grid */}
-                <div className="w-full px-4 py-4">
-                    <div className="grid grid-cols-4 gap-y-7 gap-x-2 place-items-center">
+                <div className="w-full px-2 py-4">
+                    <div className="flex flex-wrap justify-center gap-y-7 gap-x-3 sm:gap-x-4">
                         {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-b from-[#5be169] to-[#2fd341]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />}
                         {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-b from-[#5ce177] to-[#24cc54]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />}
                         {(contact.maps || contact.googleMap) && <SocialIcon iconSrc="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" label="Location" color="bg-white" href={contact.maps || contact.googleMap} target="_blank" />}
