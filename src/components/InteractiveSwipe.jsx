@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const InteractiveSwipe = ({ buttons }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [touchStartX, setTouchStartX] = useState(null);
     const [touchEndX, setTouchEndX] = useState(null);
+    const intervalRef = useRef(null);
+
+    const startInterval = () => {
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) === buttons?.length ? 0 : prev + 1);
+        }, 5000);
+    };
+
+    useEffect(() => {
+        if (!buttons || buttons.length === 0) return;
+        startInterval();
+        return () => clearInterval(intervalRef.current);
+    }, [buttons]);
 
     if (!buttons || buttons.length === 0) return null;
 
     const minSwipeDistance = 40;
 
     const onTouchStart = (e) => {
+        clearInterval(intervalRef.current);
         setTouchEndX(null); // Reset
         setTouchStartX(e.targetTouches[0].clientX);
     };
@@ -19,6 +34,7 @@ const InteractiveSwipe = ({ buttons }) => {
     };
 
     const onTouchEnd = () => {
+        startInterval(); // Resume auto swipe after interaction
         if (!touchStartX || !touchEndX) return;
         const distance = touchStartX - touchEndX;
         const isLeftSwipe = distance > minSwipeDistance;
@@ -101,10 +117,7 @@ const InteractiveSwipe = ({ buttons }) => {
     };
 
     return (
-        <div className="w-full flex-grow bg-slate-50 pt-8 pb-4 relative flex flex-col items-center border-b border-slate-200">
-
-            <h3 className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-4">Swipe for Actions</h3>
-
+        <div className="w-full flex-grow bg-slate-50 pt-4 pb-4 relative flex flex-col items-center border-b border-slate-200">
             <div
                 className="w-full max-w-[420px] h-[120px] relative overflow-visible bg-transparent select-none touch-pan-y"
                 onTouchStart={onTouchStart}
@@ -114,7 +127,6 @@ const InteractiveSwipe = ({ buttons }) => {
                 {/* Render ALL nodes to allow seamless CSS transitions when classes shift */}
                 {renderNodes()}
             </div>
-
         </div>
     );
 };
