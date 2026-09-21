@@ -194,24 +194,27 @@ const PublicNfcCard = () => {
 
                 {/* Main Action Buttons Grid */}
                 <div className="w-full px-2 py-4">
-                    <div className="flex flex-wrap justify-center gap-y-7 gap-x-3 sm:gap-x-4">
-                        {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-b from-[#5be169] to-[#2fd341]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />}
-                        {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-b from-[#5ce177] to-[#24cc54]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />}
-                        {(contact.maps || contact.googleMap) && <SocialIcon iconSrc="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" label="Location" color="bg-white" href={contact.maps || contact.googleMap} target="_blank" />}
-                        {contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={contact.website} target="_blank" />}
-                        
-                        {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={`mailto:${contact.email}`} target="_top" />}
-                        {socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-b from-[#4970c6] to-[#2b4c9b]" href={socialLinks.facebook} target="_blank" />}
-                        {socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#ffdf8a] via-[#f73752] to-[#c726a4]" href={socialLinks.instagram} target="_blank" />}
-                        {socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-gradient-to-b from-[#0a81ba] to-[#046594]" href={socialLinks.linkedin} target="_blank" />}
-                        
-                        {socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-gradient-to-b from-[#f93737] to-[#d61313]" href={socialLinks.youtube} target="_blank" />}
-                        {socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-gradient-to-b from-[#45b7f7] to-[#1796df]" href={socialLinks.twitter} target="_blank" />}
-                        {socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-gradient-to-b from-[#1b9fe3] to-[#0d7ebd]" href={socialLinks.telegram} target="_blank" />}
-                        <SocialIcon icon={FaQrcode} label="QrCode" color="bg-gradient-to-b from-[#bc62f6] to-[#9132d4]" onClick={() => setShowQR(true)} />
-                        
-                        <SocialIcon icon={FaAddressBook} label="Save Contact" color="bg-gradient-to-b from-[#1dbba4] to-[#0e9682]" onClick={generateVCard} />
-                        <SocialIcon icon={FaShareAlt} label="Share" color="bg-gradient-to-b from-[#ffb43c] to-[#f48a10]" onClick={handleShare} />
+                    <div className="flex flex-wrap justify-center gap-y-7">
+                        {[
+                            contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-b from-[#5be169] to-[#2fd341]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />,
+                            contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-b from-[#5ce177] to-[#24cc54]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />,
+                            (contact.maps || contact.googleMap) && <SocialIcon iconSrc="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" label="Location" color="bg-white" href={contact.maps || contact.googleMap} target="_blank" />,
+                            contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={contact.website} target="_blank" />,
+                            contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-b from-[#42a2f4] to-[#1e76d7]" href={`mailto:${contact.email}`} target="_top" />,
+                            socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-b from-[#4970c6] to-[#2b4c9b]" href={socialLinks.facebook} target="_blank" />,
+                            socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#ffdf8a] via-[#f73752] to-[#c726a4]" href={socialLinks.instagram} target="_blank" />,
+                            socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-gradient-to-b from-[#0a81ba] to-[#046594]" href={socialLinks.linkedin} target="_blank" />,
+                            socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-gradient-to-b from-[#f93737] to-[#d61313]" href={socialLinks.youtube} target="_blank" />,
+                            socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-gradient-to-b from-[#45b7f7] to-[#1796df]" href={socialLinks.twitter} target="_blank" />,
+                            socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-gradient-to-b from-[#1b9fe3] to-[#0d7ebd]" href={socialLinks.telegram} target="_blank" />,
+                            <SocialIcon icon={FaQrcode} label="QrCode" color="bg-gradient-to-b from-[#bc62f6] to-[#9132d4]" onClick={() => setShowQR(true)} />,
+                            <SocialIcon icon={FaAddressBook} label="Save Contact" color="bg-gradient-to-b from-[#1dbba4] to-[#0e9682]" onClick={generateVCard} />,
+                            <SocialIcon icon={FaShareAlt} label="Share" color="bg-gradient-to-b from-[#ffb43c] to-[#f48a10]" onClick={handleShare} />
+                        ].filter(Boolean).map((btn, idx) => (
+                            <div key={idx} className="w-[25%] flex justify-center">
+                                {btn}
+                            </div>
+                        ))}
                     </div>
                 </div>
 
