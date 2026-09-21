@@ -68,19 +68,28 @@ const InteractiveSwipe = ({ buttons }) => {
             const handleNodeClick = (e) => {
                 if (isCenter) {
                     if (btn.onClick) {
+                        e.preventDefault();
                         btn.onClick(e);
-                    } else if (btn.url) {
-                        window.open(btn.url, btn.target || '_self');
                     }
+                    // For URL, the <a> tag natively handles it, no need for window.open
                 } else if (positionStr === 'right') {
+                    e.preventDefault();
                     handleNext();
                 } else if (positionStr === 'left') {
+                    e.preventDefault();
                     handlePrev();
                 }
             };
 
+            const Element = (isCenter && btn.url) ? 'a' : 'div';
+            const linkProps = (isCenter && btn.url) ? { 
+                href: btn.url, 
+                target: (btn.url.startsWith('http') && !btn.url.includes('wa.me')) ? '_blank' : '_self',
+                rel: 'noopener noreferrer'
+            } : {};
+
             return (
-                <div key={btn.name} className={containerStyles} onClick={handleNodeClick}>
+                <Element key={btn.name} className={containerStyles} onClick={handleNodeClick} {...linkProps}>
                     <div className={`relative rounded-full flex items-center justify-center text-white ${isCenter ? 'w-[72px] h-[72px] shadow-[0_15px_35px_rgba(0,0,0,0.15)]' : 'w-[56px] h-[56px] shadow-[0_5px_15px_rgba(0,0,0,0.1)]'} ${btn.bgClass || 'bg-[#3b82f6]'} transition-all duration-500`}>
                         {btn.iconSrc ? (
                             <img src={btn.iconSrc} alt={btn.name} className={`${isCenter ? 'w-[38px] h-[38px] scale-105' : 'w-[28px] h-[28px]'} object-contain drop-shadow-sm z-10 relative transition-all duration-500`} />
@@ -91,7 +100,7 @@ const InteractiveSwipe = ({ buttons }) => {
                     <span className={`mt-5 font-bold tracking-wider uppercase text-[#1a2b4c] whitespace-nowrap transition-all duration-500 ${isCenter ? 'text-[14px] opacity-100 drop-shadow-sm' : 'text-[11px] opacity-0 relative top-6'}`}>
                         {btn.name}
                     </span>
-                </div>
+                </Element>
             );
         });
     };
