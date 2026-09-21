@@ -170,25 +170,26 @@ const PublicNfcCard = () => {
                 )}
 
                 {/* Main Action Buttons Grid */}
-                <DynamicGrid buttons={[
-                    { name: 'Call', icon: <FaPhoneAlt size={22} />, bgClass: 'bg-gradient-to-tr from-[#34C759] to-[#30d158]', url: contact.phone ? `tel:${formatPhoneURL(contact.phone)}` : '', condition: !!contact.phone },
-                    { name: 'WhatsApp', icon: <FaWhatsapp size={26} />, bgClass: 'bg-gradient-to-tr from-[#25D366] to-[#43d879]', url: contact.whatsapp ? `https://wa.me/${formatWhatsAppURL(contact.whatsapp)}` : '', condition: !!contact.whatsapp },
-                    { name: 'Location', iconSrc: 'https://img.icons8.com/color/96/google-maps-new.png', bgClass: 'bg-white', url: contact.maps || contact.googleMap, condition: !!(contact.maps || contact.googleMap) },
-                    { name: 'Website', icon: <FaGlobe size={24} />, bgClass: 'bg-gradient-to-tr from-[#1976D2] to-[#42A5F5]', url: contact.website, condition: !!contact.website },
-
-                    { name: 'Email', icon: <FaEnvelope size={24} />, bgClass: 'bg-gradient-to-tr from-[#0A84FF] to-[#369cff]', url: contact.email ? `mailto:${contact.email}` : '', condition: !!contact.email },
-
-                    { name: 'Facebook', icon: <FaFacebookF size={22} />, bgClass: 'bg-gradient-to-tr from-[#1877F2] to-[#3b5998]', url: socialLinks.facebook, condition: !!socialLinks.facebook },
-                    { name: 'Instagram', icon: <FaInstagram size={22} />, bgClass: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]', url: socialLinks.instagram, condition: !!socialLinks.instagram },
-                    { name: 'LinkedIn', icon: <FaLinkedinIn size={22} />, bgClass: 'bg-gradient-to-tr from-[#0077b5] to-[#005582]', url: socialLinks.linkedin, condition: !!socialLinks.linkedin },
-                    { name: 'YouTube', icon: <FaYoutube size={22} />, bgClass: 'bg-gradient-to-tr from-[#FF0000] to-[#c4302b]', url: socialLinks.youtube, condition: !!socialLinks.youtube },
-                    { name: 'Twitter', icon: <FaTwitter size={22} />, bgClass: 'bg-gradient-to-tr from-[#1DA1F2] to-[#1a91da]', url: socialLinks.twitter, condition: !!socialLinks.twitter },
-                    { name: 'Telegram', icon: <FaTelegramPlane size={22} />, bgClass: 'bg-gradient-to-tr from-[#0088cc] to-[#0077b5]', url: socialLinks.telegram, condition: !!socialLinks.telegram },
-
-                    { name: 'QrCode', icon: <FaQrcode size={24} />, bgClass: 'bg-gradient-to-tr from-[#8a2be2] to-[#9c42ed]', onClick: () => setShowQR(true), condition: true },
-                    { name: 'Save Contact', icon: <FaAddressBook size={24} />, bgClass: 'bg-gradient-to-tr from-[#009688] to-[#26a69a]', onClick: generateVCard, condition: true },
-                    { name: 'Share', icon: <FaShareAlt size={22} />, bgClass: 'bg-gradient-to-tr from-[#FF9500] to-[#ffa733]', onClick: handleShare, condition: true }
-                ].filter(btn => btn.condition)} />
+                <div className="w-full px-6 py-4">
+                    <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+                        {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-tr from-[#34C759] to-[#30d158]" href={`tel:${formatPhoneURL(contact.phone)}`} />}
+                        {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-tr from-[#25D366] to-[#43d879]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_blank" />}
+                        {(contact.maps || contact.googleMap) && <SocialIcon icon={FaMapMarkerAlt} label="Location" color="bg-white" iconColor="text-red-500" href={contact.maps || contact.googleMap} target="_blank" />}
+                        {contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-tr from-[#1976D2] to-[#42A5F5]" href={contact.website} target="_blank" />}
+                        {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-tr from-[#0A84FF] to-[#369cff]" href={`mailto:${contact.email}`} />}
+                        
+                        {socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-tr from-[#1877F2] to-[#3b5998]" href={socialLinks.facebook} target="_blank" />}
+                        {socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]" href={socialLinks.instagram} target="_blank" />}
+                        {socialLinks.linkedin && <SocialIcon icon={FaLinkedinIn} label="LinkedIn" color="bg-gradient-to-tr from-[#0077b5] to-[#005582]" href={socialLinks.linkedin} target="_blank" />}
+                        {socialLinks.youtube && <SocialIcon icon={FaYoutube} label="YouTube" color="bg-gradient-to-tr from-[#FF0000] to-[#c4302b]" href={socialLinks.youtube} target="_blank" />}
+                        {socialLinks.twitter && <SocialIcon icon={FaTwitter} label="Twitter" color="bg-gradient-to-tr from-[#1DA1F2] to-[#1a91da]" href={socialLinks.twitter} target="_blank" />}
+                        {socialLinks.telegram && <SocialIcon icon={FaTelegramPlane} label="Telegram" color="bg-gradient-to-tr from-[#0088cc] to-[#0077b5]" href={socialLinks.telegram} target="_blank" />}
+                        
+                        <SocialIcon icon={FaQrcode} label="QrCode" color="bg-gradient-to-tr from-[#8a2be2] to-[#9c42ed]" onClick={() => setShowQR(true)} />
+                        <SocialIcon icon={FaAddressBook} label="Save Contact" color="bg-gradient-to-tr from-[#009688] to-[#26a69a]" onClick={generateVCard} />
+                        <SocialIcon icon={FaShareAlt} label="Share" color="bg-gradient-to-tr from-[#FF9500] to-[#ffa733]" onClick={handleShare} />
+                    </div>
+                </div>
 
                 {/* --- Interactive Swipe Carousel (Placed precisely above Footer as per request) --- */}
                 <InteractiveSwipe buttons={[
