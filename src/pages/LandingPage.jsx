@@ -266,119 +266,118 @@ const LandingPage = () => {
                 {showProfile && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" onClick={() => setShowProfile(false)}>
                         <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"></div>
+                          <div className="w-full max-w-[420px] bg-white rounded-[32px] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col relative z-20 animate-in zoom-in-95 duration-300 ease-out max-h-[92vh] font-sans" onClick={e => e.stopPropagation()}>
+                              
+                              {/* Floating Avatar & Details */}
+                              <div className="relative w-full flex flex-col items-center pt-8 shrink-0 z-10 px-6">
+                                  {/* Profile Picture Outline */}
+                                  <div className="relative p-1.5 bg-slate-50 rounded-[2.2rem] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100">
+                                      <img src={getMediaUrl(hero.photo || hero.logo || 'https://via.placeholder.com/150')} alt="Profile" className="w-[108px] h-[108px] rounded-[1.8rem] object-cover" />
+                                  </div>
 
-                        <div className="w-full max-w-[420px] bg-white rounded-[32px] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col relative z-20 animate-in zoom-in-95 duration-300 ease-out max-h-[92vh]" onClick={e => e.stopPropagation()}>
+                                  {/* Info correctly aligned below the image */}
+                                  <h3 className="text-[22px] font-bold text-slate-800 text-center mt-5 tracking-tight flex items-center justify-center gap-1.5">
+                                      {hero.name}
+                                      <img src="https://img.icons8.com/color/48/verified-badge.png" alt="Verified" className="w-[20px] h-[20px] drop-shadow-sm" />
+                                  </h3>
 
-                            {/* Floating Avatar & Details */}
-                            <div className="relative w-full flex flex-col items-center pt-8 shrink-0 z-10 px-6">
-                                {/* Profile Picture Outline */}
-                                <div className="relative p-1.5 bg-slate-50 rounded-[2.2rem] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100">
-                                    <img src={getMediaUrl(hero.photo || hero.logo || 'https://via.placeholder.com/150')} alt="Profile" className="w-[108px] h-[108px] rounded-[1.8rem] object-cover" />
+                                  <div className="flex items-center justify-center gap-2 mt-2">
+                                      <span className="text-[12px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full border" style={{ color: themeColor, borderColor: `color-mix(in srgb, ${themeColor} 20%, transparent)`, backgroundColor: `color-mix(in srgb, ${themeColor} 8%, transparent)` }}>
+                                          {hero.designation || 'Profile'}
+                                      </span>
+                                  </div>
+
+                                  {hero.company && (
+                                      <p className="text-[14px] text-slate-500 font-medium mt-2.5 tracking-wide flex items-center gap-1.5"><FaGlobe size={13} className="opacity-70" /> {hero.company}</p>
+                                  )}
+                              </div>
+
+                              <div className="px-6 pt-6 pb-6 flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-6">
+
+                                  {(mainSection.about || hero.tagline) && (
+                                      <div className="bg-slate-50/80 rounded-[20px] p-5 border border-slate-100 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                                          <div className="absolute top-0 right-0 p-3 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity">
+                                              <FaGlobe size={64} style={{ color: themeColor }} />
+                                          </div>
+                                          <h4 className="text-[11px] font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5" style={{ color: themeColor }}><FaGlobe size={11} /> Company Details</h4>
+                                          <p className="text-[13px] text-slate-600 leading-relaxed font-medium relative z-10">{mainSection.about || hero.tagline}</p>
+                                      </div>
+                                  )}
+
+                                  <div className="flex flex-col gap-4">
+                                      {contact.phone && (
+                                          <a href={`tel:${formatPhoneURL(contact.phone)}`} className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex justify-center items-center shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
+                                                  <img src="https://img.icons8.com/3d-fluency/94/phone.png" className="w-6 h-6 object-contain drop-shadow-md" alt="phone" />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Mobile Number</p>
+                                                  <p className="text-[15px] font-bold text-slate-800 truncate">{contact.phone}</p>
+                                              </div>
+                                          </a>
+                                      )}
+
+                                      {contact.email && (
+                                          <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-red-500 flex justify-center items-center shadow-md shadow-red-500/20 group-hover:scale-105 transition-transform duration-300">
+                                                  <img src="https://img.icons8.com/3d-fluency/94/mail.png" className="w-6 h-6 object-contain drop-shadow-md" alt="email" />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Email Address</p>
+                                                  <p className="text-[15px] font-bold text-slate-800 truncate">{contact.email}</p>
+                                              </div>
+                                          </a>
+                                      )}
+
+                                      {contact.website && (
+                                          <a href={contact.website} target="_blank" rel="noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-600 flex justify-center items-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
+                                                  <FaGlobe className="text-white drop-shadow-md" size={18} />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Website</p>
+                                                  <p className="text-[15px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 truncate">{contact.website}</p>
+                                              </div>
+                                          </a>
+                                      )}
+
+                                      {(hero.address || contact.address) && (
+                                          <div className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 transition-all duration-300">
+                                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 flex justify-center items-center shadow-md shadow-orange-500/20">
+                                                  <img src="https://img.icons8.com/3d-fluency/94/home.png" className="w-6 h-6 object-contain drop-shadow-md" alt="address" />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Address</p>
+                                                  <p className="text-[14px] font-bold text-slate-700 leading-tight whitespace-pre-wrap">{hero.address || contact.address}</p>
+                                              </div>
+                                          </div>
+                                      )}
+
+                                      {(contact.maps || contact.googleMap) && (
+                                          <a href={contact.maps || contact.googleMap || '#'} target="_blank" rel="noreferrer" className="group flex items-center gap-4 bg-white p-3.5 rounded-[20px] shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05),0_10px_20px_-2px_rgba(0,0,0,0.02)] border border-slate-50 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex justify-center items-center shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform duration-300">
+                                                  <img src="https://img.icons8.com/3d-fluency/94/map-marker.png" className="w-6 h-6 object-contain drop-shadow-md" alt="location" />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Google Maps</p>
+                                                  <p className="text-[14px] font-bold text-slate-700 line-clamp-2 leading-tight">View Location on Map</p>
+                                              </div>
+                                          </a>
+                                      )}
+                                  </div>
+                              </div>
+
+                              <div className="p-5 bg-white border-t border-slate-100 flex gap-3 shrink-0 rounded-b-[32px]">
+                                  <button onClick={() => setShowProfile(false)} className="px-6 py-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 font-bold tracking-wide rounded-[20px] transition-all shadow-sm focus:outline-none active:scale-95 text-[14px]">
+                                      Close
+                                  </button>
+                                  <button onClick={generateVCard} style={{ background: `linear-gradient(135deg, ${themeColor}ee, ${themeColor})` }} className="flex-1 py-4 text-white font-bold tracking-wide rounded-[20px] shadow-[0_8px_20px_-4px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_25px_-4px_rgba(0,0,0,0.4)] hover:brightness-110 transition-all active:scale-95 text-[15px] flex items-center justify-center gap-2.5">
+                                      <svg className="w-5 h-5 fill-current opacity-90" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" /></svg> Save Info
+                                  </button>
                                 </div>
-
-                                {/* Info correctly aligned below the image */}
-                                <h3 className="text-[24px] font-black text-slate-800 text-center mt-4 tracking-tight flex items-center justify-center gap-1.5">
-                                    {hero.name}
-                                    <img src="https://img.icons8.com/color/48/verified-badge.png" alt="Verified" className="w-[22px] h-[22px] drop-shadow-sm" />
-                                </h3>
-
-                                <div className="flex items-center justify-center gap-2 mt-2">
-                                    <span className="text-[12px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-xl border" style={{ color: themeColor, borderColor: `color-mix(in srgb, ${themeColor} 20%, transparent)`, backgroundColor: `color-mix(in srgb, ${themeColor} 8%, transparent)` }}>
-                                        {hero.designation || 'Profile'}
-                                    </span>
-                                </div>
-
-                                {hero.company && (
-                                    <p className="text-[15px] text-slate-500 font-bold mt-2.5 tracking-wide flex items-center gap-1.5"><FaGlobe size={13} className="opacity-70" /> {hero.company}</p>
-                                )}
-                            </div>
-
-                            <div className="px-6 pt-6 pb-6 flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-6">
-
-                                {(mainSection.about || hero.tagline) && (
-                                    <div className="bg-slate-50/80 rounded-2xl p-5 border border-slate-100 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
-                                        <div className="absolute top-0 right-0 p-3 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity">
-                                            <FaGlobe size={64} style={{ color: themeColor }} />
-                                        </div>
-                                        <h4 className="text-[11px] font-black uppercase tracking-widest mb-2 flex items-center gap-1.5" style={{ color: themeColor }}><FaGlobe size={11} /> Company Details</h4>
-                                        <p className="text-[13px] text-slate-600 leading-relaxed font-semibold relative z-10">{mainSection.about || hero.tagline}</p>
-                                    </div>
-                                )}
-
-                                <div className="flex flex-col gap-3">
-                                    {contact.phone && (
-                                        <a href={`tel:${formatPhoneURL(contact.phone)}`} className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex justify-center items-center shadow-inner group-hover:scale-105 transition-transform duration-300">
-                                                <img src="https://img.icons8.com/3d-fluency/94/phone.png" className="w-6 h-6 object-contain drop-shadow-md" alt="phone" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Mobile Number</p>
-                                                <p className="text-[15px] font-extrabold text-slate-800 truncate">{contact.phone}</p>
-                                            </div>
-                                        </a>
-                                    )}
-
-                                    {contact.email && (
-                                        <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-red-500 flex justify-center items-center shadow-inner group-hover:scale-105 transition-transform duration-300">
-                                                <img src="https://img.icons8.com/3d-fluency/94/mail.png" className="w-6 h-6 object-contain drop-shadow-md" alt="email" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Email Address</p>
-                                                <p className="text-[15px] font-extrabold text-slate-800 truncate">{contact.email}</p>
-                                            </div>
-                                        </a>
-                                    )}
-
-                                    {contact.website && (
-                                        <a href={contact.website} target="_blank" rel="noreferrer" className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-600 flex justify-center items-center shadow-inner group-hover:scale-105 transition-transform duration-300">
-                                                <FaGlobe className="text-white drop-shadow-md" size={18} />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Website</p>
-                                                <p className="text-[15px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 truncate">{contact.website}</p>
-                                            </div>
-                                        </a>
-                                    )}
-
-                                    {(hero.address || contact.address) && (
-                                        <div className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 flex justify-center items-center shadow-inner">
-                                                <img src="https://img.icons8.com/3d-fluency/94/home.png" className="w-6 h-6 object-contain drop-shadow-md" alt="address" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Address</p>
-                                                <p className="text-[14px] font-bold text-slate-700 leading-tight whitespace-pre-wrap">{hero.address || contact.address}</p>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {(contact.maps || contact.googleMap) && (
-                                        <a href={contact.maps || contact.googleMap || '#'} target="_blank" rel="noreferrer" className="group flex items-center gap-4 bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex justify-center items-center shadow-inner group-hover:scale-105 transition-transform duration-300">
-                                                <img src="https://img.icons8.com/3d-fluency/94/map-marker.png" className="w-6 h-6 object-contain drop-shadow-md" alt="location" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Google Maps</p>
-                                                <p className="text-[14px] font-bold text-slate-700 line-clamp-2 leading-tight">View Location on Map</p>
-                                            </div>
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="p-5 bg-white border-t border-slate-100 flex gap-3 shrink-0 rounded-b-[32px]">
-                                <button onClick={() => setShowProfile(false)} className="px-6 py-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 font-black tracking-wide rounded-2xl transition-all shadow-sm focus:outline-none active:scale-95 text-[14px]">
-                                    Close
-                                </button>
-                                <button onClick={generateVCard} style={{ background: `linear-gradient(135deg, ${themeColor}ee, ${themeColor})` }} className="flex-1 py-4 text-white font-black tracking-wide rounded-2xl shadow-lg hover:shadow-xl hover:brightness-110 transition-all active:scale-95 text-[15px] flex items-center justify-center gap-2.5">
-                                    <svg className="w-5 h-5 fill-current opacity-90" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" /></svg> Save Info
-                                </button>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
 
 
