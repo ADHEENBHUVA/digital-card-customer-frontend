@@ -85,14 +85,14 @@ const InteractiveSwipe = ({ buttons }) => {
 
             return (
                 <div key={btn.name} className={containerStyles} onClick={handleNodeClick}>
-                    <div className={`relative rounded-full flex items-center justify-center text-white ${isCenter ? 'w-[72px] h-[72px] shadow-[0_15px_35px_rgba(0,0,0,0.15)]' : 'w-[56px] h-[56px] shadow-[0_5px_15px_rgba(0,0,0,0.1)]'} ${btn.bgClass || 'bg-[#3b82f6]'} transition-all duration-500`}>
+                    <div className={`relative rounded-full flex items-center justify-center text-white ${isCenter ? 'w-[64px] h-[64px] shadow-[0_15px_35px_rgba(0,0,0,0.15)]' : 'w-[50px] h-[50px] shadow-[0_5px_15px_rgba(0,0,0,0.1)]'} ${btn.bgClass || 'bg-[#3b82f6]'} transition-all duration-500`}>
                         {btn.iconSrc ? (
-                            <img src={btn.iconSrc} alt={btn.name} className={`${isCenter ? 'w-[38px] h-[38px] scale-105' : 'w-[28px] h-[28px]'} object-contain drop-shadow-sm z-10 relative transition-all duration-500`} />
+                            <img src={btn.iconSrc} alt={btn.name} className={`${isCenter ? 'w-[32px] h-[32px] scale-105' : 'w-[24px] h-[24px]'} object-contain drop-shadow-sm z-10 relative transition-all duration-500`} />
                         ) : (
-                            <div className="relative z-10 drop-shadow-sm transition-all duration-500">{React.cloneElement(btn.icon, { size: isCenter ? 30 : 24 })}</div>
+                            <div className="relative z-10 drop-shadow-sm transition-all duration-500">{React.cloneElement(btn.icon, { size: isCenter ? 26 : 20 })}</div>
                         )}
                     </div>
-                    <span className={`mt-5 font-bold tracking-wider uppercase text-[#1a2b4c] whitespace-nowrap transition-all duration-500 ${isCenter ? 'text-[14px] opacity-100 drop-shadow-sm' : 'text-[11px] opacity-0 relative top-6'}`}>
+                    <span className={`mt-4 font-bold tracking-wider uppercase text-[#1a2b4c] whitespace-nowrap transition-all duration-500 ${isCenter ? 'text-[12px] opacity-100 drop-shadow-sm' : 'text-[10px] opacity-0 relative top-6'}`}>
                         {btn.name}
                     </span>
                 </div>
