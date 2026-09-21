@@ -5,6 +5,7 @@ import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaGlobe, FaFacebookF, FaInstagram, 
 import BusinessHero from '../components/BusinessHero';
 import DynamicGrid from '../components/DynamicGrid';
 import InteractiveSwipe from '../components/InteractiveSwipe';
+import { handleQRShare } from '../utils/qrShare';
 
 const SocialIcon = ({ icon: Icon, iconSrc, label, color, iconColor = 'text-white', href, target, onClick }) => {
     const innerContent = (
@@ -389,26 +390,11 @@ const LandingPage = () => {
                             <p className="text-sm text-slate-500 mb-6 text-center">Share this card instantly by scanning the code below</p>
 
                             <div className="p-3 bg-white border-2 border-slate-100 rounded-2xl shadow-sm mb-6">
-                                <QRCode value={window.location.href} size={200} bgColor="#ffffff" fgColor="#000000" />
+                                <QRCode id="qr-code-svg" value={window.location.href} size={200} bgColor="#ffffff" fgColor="#000000" />
                             </div>
 
                             <div className="flex w-full gap-3">
-                                <button onClick={async () => {
-                                    if (navigator.share) {
-                                        try {
-                                            await navigator.share({
-                                                title: 'Digital Card',
-                                                text: 'Check out my Digital Card!',
-                                                url: window.location.href,
-                                            });
-                                        } catch (error) {
-                                            console.log('Error sharing', error);
-                                        }
-                                    } else {
-                                        navigator.clipboard.writeText(window.location.href);
-                                        alert('Link copied to clipboard!');
-                                    }
-                                }} className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-md shadow-blue-500/20 active:scale-[0.98]">
+                                <button onClick={() => handleQRShare(window.location.href)} className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-md shadow-blue-500/20 active:scale-[0.98]">
                                     Share
                                 </button>
                                 <button onClick={() => setShowQR(false)} className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors active:scale-[0.98]">
