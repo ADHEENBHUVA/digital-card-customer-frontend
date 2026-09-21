@@ -11,15 +11,20 @@ const InteractiveSwipe = ({ buttons }) => {
 
     const onTouchStart = (e) => {
         setTouchEndX(null); // Reset
-        setTouchStartX(e.targetTouches[0].clientX);
+        setTouchStartX(e.targetTouches ? e.targetTouches[0].clientX : e.clientX);
     };
 
     const onTouchMove = (e) => {
-        setTouchEndX(e.targetTouches[0].clientX);
+        if (!touchStartX) return; // Prevent move if not started
+        setTouchEndX(e.targetTouches ? e.targetTouches[0].clientX : e.clientX);
     };
 
     const onTouchEnd = () => {
-        if (!touchStartX || !touchEndX) return;
+        if (!touchStartX || !touchEndX) {
+            setTouchStartX(null);
+            setTouchEndX(null);
+            return;
+        }
         const distance = touchStartX - touchEndX;
         const isLeftSwipe = distance > minSwipeDistance;
         const isRightSwipe = distance < -minSwipeDistance;
@@ -29,6 +34,9 @@ const InteractiveSwipe = ({ buttons }) => {
         } else if (isRightSwipe) {
             handlePrev();
         }
+        
+        setTouchStartX(null);
+        setTouchEndX(null);
     };
 
     const handleNext = () => {
@@ -111,10 +119,14 @@ const InteractiveSwipe = ({ buttons }) => {
             <h3 className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-6">Swipe for Actions</h3>
 
             <div
-                className="w-full max-w-[420px] h-[160px] relative overflow-visible bg-transparent select-none touch-pan-y"
+                className="w-full max-w-[420px] h-[160px] relative overflow-visible bg-transparent select-none touch-pan-y cursor-grab active:cursor-grabbing"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
+                onMouseDown={onTouchStart}
+                onMouseMove={onTouchMove}
+                onMouseUp={onTouchEnd}
+                onMouseLeave={onTouchEnd}
             >
                 {/* Render ALL nodes to allow seamless CSS transitions when classes shift */}
                 {renderNodes()}

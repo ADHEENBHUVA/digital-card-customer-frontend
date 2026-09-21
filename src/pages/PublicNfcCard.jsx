@@ -162,8 +162,8 @@ const PublicNfcCard = () => {
     const activeFooterBg = footer.backgroundColor || themeColor;
 
     return (
-        <div style={{ '--theme-color': themeColor, '--footer-bg': activeFooterBg, '--footer-border': `${activeFooterBg}90` }} className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex justify-center font-sans overflow-x-hidden">
-            <div className="w-full max-w-[420px] sm:max-w-[600px] bg-white shadow-[0_15px_50px_rgba(0,0,0,0.08)] relative flex flex-col min-h-screen items-center">
+        <div style={{ '--theme-color': themeColor, '--footer-bg': activeFooterBg, '--footer-border': `${activeFooterBg}90` }} className="min-h-screen sm:min-h-0 sm:py-10 bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex justify-center font-sans overflow-x-hidden">
+            <div className="w-full max-w-[420px] bg-white sm:rounded-[2.5rem] sm:border-[8px] sm:border-slate-800 shadow-[0_15px_50px_rgba(0,0,0,0.15)] sm:shadow-[0_20px_60px_rgba(0,0,0,0.2)] relative flex flex-col min-h-screen sm:min-h-[auto] sm:overflow-hidden items-center">
 
                 {/* Import the new BusinessHero component here and pass strictly hero config */}
                 <BusinessHero hero={hero} />
