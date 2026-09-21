@@ -172,11 +172,11 @@ const PublicNfcCard = () => {
                 {/* Main Action Buttons Grid */}
                 <div className="w-full px-6 py-4">
                     <div className="grid grid-cols-4 gap-y-6 gap-x-2">
-                        {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-tr from-[#34C759] to-[#30d158]" href={`tel:${formatPhoneURL(contact.phone)}`} />}
-                        {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-tr from-[#25D366] to-[#43d879]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_blank" />}
+                        {contact.phone && <SocialIcon icon={FaPhoneAlt} label="Call" color="bg-gradient-to-tr from-[#34C759] to-[#30d158]" href={`tel:${formatPhoneURL(contact.phone)}`} target="_top" />}
+                        {contact.whatsapp && <SocialIcon icon={FaWhatsapp} label="WhatsApp" color="bg-gradient-to-tr from-[#25D366] to-[#43d879]" href={`https://wa.me/${formatWhatsAppURL(contact.whatsapp)}`} target="_top" />}
                         {(contact.maps || contact.googleMap) && <SocialIcon icon={FaMapMarkerAlt} label="Location" color="bg-white" iconColor="text-red-500" href={contact.maps || contact.googleMap} target="_blank" />}
                         {contact.website && <SocialIcon icon={FaGlobe} label="Website" color="bg-gradient-to-tr from-[#1976D2] to-[#42A5F5]" href={contact.website} target="_blank" />}
-                        {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-tr from-[#0A84FF] to-[#369cff]" href={`mailto:${contact.email}`} />}
+                        {contact.email && <SocialIcon icon={FaEnvelope} label="Email" color="bg-gradient-to-tr from-[#0A84FF] to-[#369cff]" href={`mailto:${contact.email}`} target="_top" />}
                         
                         {socialLinks.facebook && <SocialIcon icon={FaFacebookF} label="Facebook" color="bg-gradient-to-tr from-[#1877F2] to-[#3b5998]" href={socialLinks.facebook} target="_blank" />}
                         {socialLinks.instagram && <SocialIcon icon={FaInstagram} label="Instagram" color="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]" href={socialLinks.instagram} target="_blank" />}
