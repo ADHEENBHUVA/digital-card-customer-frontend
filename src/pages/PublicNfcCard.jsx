@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import useSWR from 'swr';
 import { useParams } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import { FaPhoneAlt, FaWhatsapp, FaGlobe, FaShareAlt, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter, FaTelegramPlane, FaMapMarkerAlt, FaEnvelope, FaQrcode, FaAddressBook, FaRegCommentDots } from 'react-icons/fa';
@@ -38,26 +39,24 @@ const SocialIcon = ({ icon: Icon, iconSrc, label, color, iconColor = 'text-white
 
 const PublicNfcCard = () => {
     const { token } = useParams();
-    const [data, setData] = useState(null);
+
     const [showQR, setShowQR] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
     const [showInquiry, setShowInquiry] = useState(false);
     const [inquiryData, setInquiryData] = useState({ name: '', mobile: '', email: '', subject: '', message: '' });
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const isPreview = urlParams.get('preview');
-        const queryParams = isPreview ? `?preview=true` : ``; // Removed Date.now() to allow browser caching
-        
-        fetch(`${import.meta.env.VITE_API_URL}/api/public/card/nfc/${token}${queryParams}`)
-            .then(res => res.json())
-            .then(info => {
-                setData(info);
-            })
-            .catch(err => {
-                console.error(err);
-            });
-    }, [token]);
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPreview = urlParams.get('preview');
+    const queryParams = isPreview ? `?preview=true` : ``; 
+
+    const fetcher = url => fetch(url).then(res => res.json());
+    const { data: info, error } = useSWR(
+        `${import.meta.env.VITE_API_URL}/api/public/card/nfc/${token}${queryParams}`,
+        fetcher,
+        { revalidateOnFocus: false, dedupingInterval: 5000 }
+    );
+
+    const data = info || null;
 
     if (!data) {
         return <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0]"></div>;
