@@ -59,7 +59,32 @@ const PublicNfcCard = () => {
     const data = info || null;
 
     if (!data) {
-        return <div className="min-h-screen bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0]"></div>;
+        return (
+            <div className="min-h-screen sm:min-h-0 sm:py-10 bg-gradient-to-br from-[#eef2f6] to-[#e4e9f0] flex justify-center font-sans">
+                <div className="w-full max-w-[420px] bg-white sm:rounded-[2.5rem] sm:border-[8px] sm:border-slate-200 shadow-xl relative flex flex-col min-h-screen sm:min-h-[auto] overflow-hidden items-center animate-pulse">
+                    <div className="w-full h-[250px] bg-slate-200"></div>
+                    <div className="relative -mt-16 w-[120px] h-[120px] bg-slate-300 rounded-[2rem] border-4 border-white mb-4 shadow-sm"></div>
+                    <div className="w-3/4 h-8 bg-slate-200 rounded-lg mb-3"></div>
+                    <div className="w-1/2 h-4 bg-slate-200 rounded-lg mb-6"></div>
+                    <div className="flex gap-4 mb-8 w-full px-8 justify-center">
+                        <div className="w-1/2 h-12 bg-slate-200 rounded-full"></div>
+                        <div className="w-1/2 h-12 bg-slate-200 rounded-full"></div>
+                    </div>
+                    <div className="w-full px-4 pt-4">
+                        <div className="flex flex-wrap justify-center gap-y-7">
+                            {[...Array(8)].map((_, i) => (
+                                <div key={i} className="w-[25%] flex justify-center">
+                                    <div className="flex flex-col items-center gap-2">
+                                        <div className="w-[54px] h-[54px] bg-slate-200 rounded-[16px]"></div>
+                                        <div className="w-12 h-3 bg-slate-200 rounded"></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     if (!data || data.code) {
